@@ -42,32 +42,13 @@ sudo mysql_install_db
 ###############
 echo "Setting up MySQL..."
 
-# Credit for method: https://gist.github.com/Mins/4602864
-sudo apt-get -qq install -f expect > /dev/null 2>&1 # Install Expect
-
-# Setup Expect
-SECURE_MYSQL=$(expect -c "
-set timeout 10
-spawn mysql_secure_installation
-expect \"Enter current password for root (enter for none):\"
-send \"$MYSQL\r\"
-expect \"Change the root password?\"
-send \"n\r\"
-expect \"Remove anonymous users?\"
-send \"y\r\"
-expect \"Disallow root login remotely?\"
-send \"y\r\"
-expect \"Remove test database and access to it?\"
-send \"y\r\"
-expect \"Reload privilege tables now?\"
-send \"y\r\"
-expect eof
-")
-
-# Execute Expect
-echo "$SECURE_MYSQL"
-
-sudo apt-get -qq purge -f expect > /dev/null 2>&1 # Purge Expect
+# Replacement For mysql_secure_installation
+mysqladmin -u root password "$MYSQL_ROOT_PASSWORD"
+mysql -u root -p"$MYSQL_ROOT_PASSWORD" -e "UPDATE mysql.user SET Password=PASSWORD('$MYSQL_ROOT_PASSWORD') WHERE User='root'"
+mysql -u root -p"$MYSQL_ROOT_PASSWORD" -e "DELETE FROM mysql.user WHERE User='root' AND Host NOT IN ('localhost', '127.0.0.1', '::1')"
+mysql -u root -p"$MYSQL_ROOT_PASSWORD" -e "DELETE FROM mysql.user WHERE User=''"
+mysql -u root -p"$MYSQL_ROOT_PASSWORD" -e "DELETE FROM mysql.db WHERE Db='test' OR Db='test\_%'"
+mysql -u root -p"$MYSQL_ROOT_PASSWORD" -e "FLUSH PRIVILEGES"
 
 ###############
 # Install PHP #
