@@ -85,9 +85,11 @@ MYSQL_ROOT_PASSWORD="$(< /dev/urandom tr -dc _A-Z-a-z-0-9 | head -c${1:-32})"
 # ----- Execute ----- #
 #######################
 
+echo ""
 echo "${CYAN}#########################"
 echo "# LAMP INSTALL - tehgin #"
 echo "#########################"
+echo ""
 
 update_repo
 
@@ -108,3 +110,4 @@ echo "${NC}MySQL Root Password: ${RED}${MYSQL_ROOT_PASSWORD}"
 
 echo ""
 echo "${CYAN}Have a nice day!${NC}"
+echo ""
