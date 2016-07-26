@@ -78,7 +78,7 @@ sudo service apache2 restart > /dev/null 2>&1 # Restart Apache
 # Randomizes password for MySQL root user.
 rand_pass ()
 {
-MYSQL_ROOT_PASSWORD="$(< /dev/urandom tr -dc _A-Z-a-z-0-9 | head -c${1:-32})"
+MYSQL_ROOT_PASSWORD="$(< /dev/urandom tr -dc 'a-zA-Z0-9' | head -c${1:-32})"
 }
 
 #######################
