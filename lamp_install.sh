@@ -50,7 +50,7 @@ echo "Setting up MySQL..."
 # mysql_secure_installation Automation
 
 # Set MySQL Root Password
-mysqladmin -u root password $MYSQL_ROOT_PASSWORD
+mysqladmin -u root -p$MYSQL_ROOT_PASSWORD password $MYSQL_ROOT_PASSWORD
 
 # Delete Anonymous Users
 mysql -u root -p"$MYSQL_ROOT_PASSWORD" -e "DELETE FROM mysql.user WHERE User=''"
