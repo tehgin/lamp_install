@@ -64,9 +64,7 @@ sudo apt-get -qq install -f php5 libapache2-mod-php5 php5-mcrypt > /dev/null 2>&
 # Configures Apache then restarts the service.
 configure_apache ()
 {
-echo "Edit /etc/apache2/mods-enabled/dir.conf"
-echo "Change index.php priority to first in mod_dir.c"
-echo "Restart Apache to save changes."
+sed -i 's/DirectoryIndex\ index.html\ index.cgi\ index.pl\ index.php\ index.xhtml\ index.htm/DirectoryIndex\ index.php\ index.html\ index.cgi\ index.pl\ index.xhtml\ index.htm/g' /etc/apache2/mods-enabled/dir.conf
 sudo service apache2 restart > /dev/null 2>&1 # Restart Apache
 }
 
