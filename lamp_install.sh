@@ -35,7 +35,8 @@ sudo apt-get -qq install -f mysql-server php5-mysql
 ##############################################
 # Install MySQL Database Directory Structure #
 ##############################################
-sudo mysql_install_db
+sudo mysql_install_db > /dev/null 2>&1
+
 
 ###############
 # Setup MySQL #
@@ -59,11 +60,13 @@ mysql -u root -p"$MYSQL_ROOT_PASSWORD" -e "DELETE FROM mysql.db WHERE Db='test' 
 # Flush Privileges
 mysql -u root -p"$MYSQL_ROOT_PASSWORD" -e "FLUSH PRIVILEGES"
 
+
 ###############
 # Install PHP #
 ###############
 echo "Installing PHP..."
 sudo apt-get -qq install -f php5 libapache2-mod-php5 php5-mcrypt > /dev/null 2>&1
+
 
 #########################################
 # Echo Apache Configuration Information #
@@ -71,6 +74,7 @@ sudo apt-get -qq install -f php5 libapache2-mod-php5 php5-mcrypt > /dev/null 2>&
 echo "Edit /etc/apache2/mods-enabled/dir.conf"
 echo "Change index.php priority to first in mod_dir.c"
 echo "Restart Apache to save changes."
+
 
 ##################
 # Restart Apache #
