@@ -36,7 +36,7 @@ sudo apt-get -qq install -f apache2 > /dev/null 2>&1
 }
 
 ### Function: install_mysql
-# Installs MySQL, then removes security holes.
+# Installs MySQL, then patches known security holes.
 install_mysql ()
 {
 rand_pass # Generate random password for MySQL root user.
