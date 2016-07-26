@@ -9,7 +9,6 @@
 #############
 # Variables #
 #############
-export DEBIAN_FRONTEND=noninteractive # Remove MySQL Installation Input Prompt
 MYSQL_ROOT_PASSWORD=ybzKriEr1IW3EQDF6u32 # Randomly Generated For Testing
 
 #######################
@@ -30,6 +29,9 @@ sudo apt-get -qq install -f apache2 > /dev/null 2>&1
 # Install MySQL #
 #################
 echo "Installing MySQL..."
+
+echo "mysql-server mysql-server/root_password password ${MYSQL_ROOT_PASSWORD}" | sudo debconf-set-selections
+echo "mysql-server mysql-server/root_password_again password ${MYSQL_ROOT_PASSWORD}" | sudo debconf-set-selections
 
 sudo apt-get -qq install -f mysql-server php5-mysql > /dev/null 2>&1
 
