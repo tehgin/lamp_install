@@ -11,15 +11,15 @@
 
 # Update Repositories
 echo "Updating repositories..."
-sudo apt-get -qq update
+sudo apt-get -qq update > /dev/null 2>&1
 
 # Install Apache
 echo "Installing Apache..."
-sudo apt-get -qq install -f apache2
+sudo apt-get -qq install -f apache2 > /dev/null 2>&1
 
 # Install MySQL
 echo "Installing MySQL..."
-sudo apt-get -qq install -f mysql-server php5-mysql
+sudo apt-get -qq install -f mysql-server php5-mysql > /dev/null 2>&1
 
 # Install MySQL Database Directory Structure
 sudo mysql_install_db
@@ -29,7 +29,7 @@ sudo mysql_secure_installation
 
 # Install PHP
 echo "Installing PHP..."
-sudo apt-get -qq install -f php5 libapache2-mod-php5 php5-mcrypt
+sudo apt-get -qq install -f php5 libapache2-mod-php5 php5-mcrypt > /dev/null 2>&1
 
 # Echo Apache Configuration Information
 echo "Edit /etc/apache2/mods-enabled/dir.conf"
@@ -37,4 +37,5 @@ echo "Change index.php priority to first in mod_dir.c"
 echo "Restart Apache to save changes."
 
 # Restart Apache
-sudo service apache2 restart
+echo "Restarting Apache..."
+sudo service apache2 restart > /dev/null 2>&1
