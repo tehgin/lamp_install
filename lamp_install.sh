@@ -16,17 +16,20 @@ MYSQL_ROOT_PASSWORD=ybzKriEr1IW3EQDF6u32 # Randomly Generated For Testing
 #########################
 
 ### Function: update_repo
-function update_repo {
+update_repo ()
+{
 sudo apt-get -qq update > /dev/null 2>&1
 }
 
 ### Function: install_apache
-function install_apache {
+install_apache ()
+{
 sudo apt-get -qq install -f apache2 > /dev/null 2>&1
 }
 
 ### Function: install_mysql
-function install_mysql {
+install_mysql ()
+{
 echo "mysql-server mysql-server/root_password password ${MYSQL_ROOT_PASSWORD}" | sudo debconf-set-selections
 echo "mysql-server mysql-server/root_password_again password ${MYSQL_ROOT_PASSWORD}" | sudo debconf-set-selections
 sudo apt-get -qq install -f mysql-server php5-mysql > /dev/null 2>&1 # Install MySQL
@@ -46,12 +49,14 @@ mysql -u root -p"$MYSQL_ROOT_PASSWORD" -e "FLUSH PRIVILEGES"
 }
 
 ### Function: install_php
-function install_php {
+install_php ()
+{
 sudo apt-get -qq install -f php5 libapache2-mod-php5 php5-mcrypt > /dev/null 2>&1
 }
 
 ### Function: configure_apache
-function configure_apache {
+configure_apache ()
+{
 echo "Edit /etc/apache2/mods-enabled/dir.conf"
 echo "Change index.php priority to first in mod_dir.c"
 echo "Restart Apache to save changes."
