@@ -107,4 +107,4 @@ echo ""
 echo "${NC}MySQL Root Password: ${RED}${MYSQL_ROOT_PASSWORD}"
 
 echo ""
-echo "${CYAN}Have a nice day!"
+echo "${CYAN}Have a nice day!${NC}"
