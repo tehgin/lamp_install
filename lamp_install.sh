@@ -11,6 +11,12 @@
 #########################
 MYSQL_ROOT_PASSWORD= # Automatically Set Via rand_pass
 
+# Output Colors
+CYAN='\033[0;36m'
+GREEN='\033[0;32m'
+RED='\033[0;31m'
+NC='\033[0m' # No Color
+
 #########################
 # ----- Functions ----- #
 #########################
@@ -79,14 +85,14 @@ MYSQL_ROOT_PASSWORD="$(< /dev/urandom tr -dc _A-Z-a-z-0-9 | head -c${1:-32})"
 # ----- Execute ----- #
 #######################
 
-echo "#########################"
+echo "${CYAN}#########################"
 echo "# LAMP INSTALL - tehgin #"
 echo "#########################"
 
 update_repo
 
 install_apache
-echo "Apache installed!"
+echo "${GREEN}Apache installed!"
 
 install_mysql
 echo "MySQL installed!"
@@ -98,7 +104,7 @@ configure_apache
 echo "Configurations complete!"
 
 echo ""
-echo "MySQL Root Password: ${MYSQL_ROOT_PASSWORD}"
+echo "${NC}MySQL Root Password: ${RED}${MYSQL_ROOT_PASSWORD}"
 
 echo ""
-echo "Have a nice day!"
+echo "${CYAN}Have a nice day!"
