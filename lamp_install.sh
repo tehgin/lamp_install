@@ -39,7 +39,7 @@ sudo apt-get -qq install -f apache2 > /dev/null 2>&1
 # Installs MySQL, then removes security holes.
 install_mysql ()
 {
-rand_pass
+rand_pass # Generate random password for MySQL root user.
 
 echo "mysql-server mysql-server/root_password password ${MYSQL_ROOT_PASSWORD}" | sudo debconf-set-selections
 echo "mysql-server mysql-server/root_password_again password ${MYSQL_ROOT_PASSWORD}" | sudo debconf-set-selections
