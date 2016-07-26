@@ -42,12 +42,21 @@ sudo mysql_install_db
 ###############
 echo "Setting up MySQL..."
 
-# Replacement For mysql_secure_installation
-mysqladmin -u root password "$MYSQL_ROOT_PASSWORD"
+# mysql_secure_installation Automation
+
+# Set MySQL Root Password
 mysql -u root -p"$MYSQL_ROOT_PASSWORD" -e "UPDATE mysql.user SET Password=PASSWORD('$MYSQL_ROOT_PASSWORD') WHERE User='root'"
-mysql -u root -p"$MYSQL_ROOT_PASSWORD" -e "DELETE FROM mysql.user WHERE User='root' AND Host NOT IN ('localhost', '127.0.0.1', '::1')"
+
+# Delete Anonymous Users
 mysql -u root -p"$MYSQL_ROOT_PASSWORD" -e "DELETE FROM mysql.user WHERE User=''"
+
+# Remove Remote Login For MySQL Root User
+mysql -u root -p"$MYSQL_ROOT_PASSWORD" -e "DELETE FROM mysql.user WHERE User='root' AND Host NOT IN ('localhost', '127.0.0.1', '::1')"
+
+# Delete Test Database
 mysql -u root -p"$MYSQL_ROOT_PASSWORD" -e "DELETE FROM mysql.db WHERE Db='test' OR Db='test\_%'"
+
+# Flush Privileges
 mysql -u root -p"$MYSQL_ROOT_PASSWORD" -e "FLUSH PRIVILEGES"
 
 ###############
