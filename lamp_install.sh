@@ -78,9 +78,27 @@ MYSQL_ROOT_PASSWORD="$(< /dev/urandom tr -dc _A-Z-a-z-0-9 | head -c${1:-32})"
 #######################
 # ----- Execute ----- #
 #######################
+
+echo "#########################"
+echo "# LAMP INSTALL - tehgin #"
+echo "#########################"
+
 update_repo
+
 install_apache
+echo "Apache installed!"
+
 install_mysql
-echo "MySQL Root Password: ${MYSQL_ROOT_PASSWORD}"
+echo "MySQL installed!"
+
 install_php
+echo "PHP installed!"
+
 configure_apache
+echo "Configurations complete!"
+
+echo ""
+echo "MySQL Root Password: ${MYSQL_ROOT_PASSWORD}"
+
+echo ""
+echo "Have a nice day!"
