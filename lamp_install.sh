@@ -107,6 +107,7 @@ echo "${GREEN}Configurations complete!${NC}"
 
 echo ""
 echo "${NC}MySQL Root Password: ${RED}${MYSQL_ROOT_PASSWORD}${NC}"
+echo "Copy This password as it's not stored anywhere! You WILL lose it."
 
 echo ""
 echo "${CYAN}Have a nice day!${NC}"
