@@ -29,6 +29,11 @@ sudo apt-get -qq install -f apache2 > /dev/null 2>&1
 # Install MySQL #
 #################
 echo "Installing MySQL..."
+
+
+sudo debconf-set-selections <<< 'mysql-server mysql-server/root_password password default_password'
+sudo debconf-set-selections <<< 'mysql-server mysql-server/root_password_again password default_password'
+
 sudo apt-get -qq install -f mysql-server php5-mysql
 
 
