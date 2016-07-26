@@ -10,13 +10,16 @@
 # Actual code to come later.
 
 # Update Repositories
-sudo apt-get update
+echo "Updating repositories..."
+sudo apt-get -qq update
 
 # Install Apache
-sudo apt-get install apache2
+echo "Installing Apache..."
+sudo apt-get -qq install -f apache2
 
 # Install MySQL
-sudo apt-get install mysql-server php5-mysql
+echo "Installing MySQL..."
+sudo apt-get -qq install -f mysql-server php5-mysql
 
 # Install MySQL Database Directory Structure
 sudo mysql_install_db
@@ -25,7 +28,8 @@ sudo mysql_install_db
 sudo mysql_secure_installation
 
 # Install PHP
-sudo apt-get install php5 libapache2-mod-php5 php5-mcrypt
+echo "Installing PHP..."
+sudo apt-get -qq install -f php5 libapache2-mod-php5 php5-mcrypt
 
 # Echo Apache Configuration Information
 echo "Edit /etc/apache2/mods-enabled/dir.conf"
