@@ -40,7 +40,7 @@ get_apache_version ()
 # Installs Apache.
 install_apache ()
 {
-sudo apt-get install -f apache2 > /dev/null 2>&1
+sudo apt-get -qq install -f apache2 > /dev/null 2>&1
 
 get_apache_version
 }
@@ -53,7 +53,7 @@ rand_pass # Generate random password for MySQL root user.
 
 echo "mysql-server mysql-server/root_password password ${MYSQL_ROOT_PASSWORD}" | sudo debconf-set-selections
 echo "mysql-server mysql-server/root_password_again password ${MYSQL_ROOT_PASSWORD}" | sudo debconf-set-selections
-sudo apt-get install -f mysql-server php5-mysql > /dev/null 2>&1 # Install MySQL
+sudo apt-get -qq install -f mysql-server php5-mysql > /dev/null 2>&1 # Install MySQL
 
 sudo mysql_install_db > /dev/null 2>&1 # Install MySQL Database Directory Structure
 
@@ -73,7 +73,7 @@ mysql -u root -p"$MYSQL_ROOT_PASSWORD" -e "FLUSH PRIVILEGES"
 # Installs PHP and select modules.
 install_php ()
 {
-sudo apt-get install -f php5 libapache2-mod-php5 php5-mcrypt > /dev/null 2>&1
+sudo apt-get -qq install -f php5 libapache2-mod-php5 php5-mcrypt > /dev/null 2>&1
 }
 
 ### Function: configure_apache
