@@ -10,6 +10,7 @@
 # ----- Variables ----- #
 #########################
 MYSQL_ROOT_PASSWORD= # Automatically Set Via rand_pass
+APACHE_VERSION= # Apache Version Information
 
 # Output Colors
 CYAN='\033[0;36m'
@@ -25,14 +26,23 @@ NC='\033[0m' # No Color
 # Updates repository.
 update_repo ()
 {
-sudo apt-get -qq update > /dev/null 2>&1
+sudo apt-get update > /dev/null 2>&1
+}
+
+### Function: get_apache_version
+# Obtain Apache version information.
+get_apache_version ()
+{
+  APACHE_VERSION="$(apachectl -V | grep version | awk {'print $3'})"
 }
 
 ### Function: install_apache
 # Installs Apache.
 install_apache ()
 {
-sudo apt-get -qq install -f apache2 > /dev/null 2>&1
+sudo apt-get install -f apache2 > /dev/null 2>&1
+
+get_apache_version
 }
 
 ### Function: install_mysql
@@ -43,7 +53,7 @@ rand_pass # Generate random password for MySQL root user.
 
 echo "mysql-server mysql-server/root_password password ${MYSQL_ROOT_PASSWORD}" | sudo debconf-set-selections
 echo "mysql-server mysql-server/root_password_again password ${MYSQL_ROOT_PASSWORD}" | sudo debconf-set-selections
-sudo apt-get -qq install -f mysql-server php5-mysql > /dev/null 2>&1 # Install MySQL
+sudo apt-get install -f mysql-server php5-mysql > /dev/null 2>&1 # Install MySQL
 
 sudo mysql_install_db > /dev/null 2>&1 # Install MySQL Database Directory Structure
 
@@ -63,7 +73,7 @@ mysql -u root -p"$MYSQL_ROOT_PASSWORD" -e "FLUSH PRIVILEGES"
 # Installs PHP and select modules.
 install_php ()
 {
-sudo apt-get -qq install -f php5 libapache2-mod-php5 php5-mcrypt > /dev/null 2>&1
+sudo apt-get install -f php5 libapache2-mod-php5 php5-mcrypt > /dev/null 2>&1
 }
 
 ### Function: configure_apache
@@ -94,7 +104,7 @@ echo ""
 update_repo
 
 install_apache
-echo "${GREEN}Apache installed!${NC}"
+echo "${GREEN}Apache installed!${NC} (${APACHE_VERSION})"
 
 install_mysql
 echo "${GREEN}MySQL installed!${NC}"
