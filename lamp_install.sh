@@ -10,7 +10,9 @@
 # ----- Variables ----- #
 #########################
 MYSQL_ROOT_PASSWORD= # Automatically Set Via rand_pass
+
 APACHE_VERSION= # Apache Version Information
+PHP_VERSION= # PHP Version Information
 
 # Output Colors
 CYAN='\033[0;36m'
@@ -36,12 +38,18 @@ get_apache_version ()
   APACHE_VERSION="$(apachectl -V | grep version | awk {'print $3'})"
 }
 
+### Function: get_php_version
+# Obtain PHP version information.
+get_php_version ()
+{
+  PHP_VERSION="$(php -v | grep built | awk {'print $2'})"
+}
+
 ### Function: install_apache
 # Installs Apache.
 install_apache ()
 {
 sudo apt-get -qq install -f apache2 > /dev/null 2>&1
-
 get_apache_version
 }
 
@@ -74,6 +82,7 @@ mysql -u root -p"$MYSQL_ROOT_PASSWORD" -e "FLUSH PRIVILEGES"
 install_php ()
 {
 sudo apt-get -qq install -f php5 libapache2-mod-php5 php5-mcrypt > /dev/null 2>&1
+get_php_version
 }
 
 ### Function: configure_apache
@@ -110,7 +119,7 @@ install_mysql
 echo "${GREEN}MySQL installed!${NC}"
 
 install_php
-echo "${GREEN}PHP installed!${NC}"
+echo "${GREEN}PHP installed!${NC} (${PHP_VERSION})"
 
 configure_apache
 echo "${GREEN}Configurations complete!${NC}"
