@@ -12,6 +12,7 @@
 MYSQL_ROOT_PASSWORD= # Automatically Set Via rand_pass
 
 APACHE_VERSION= # Apache Version Information
+MYSQL_VERSION= # MySQL Version Information
 PHP_VERSION= # PHP Version Information
 
 # Output Colors
@@ -36,6 +37,13 @@ sudo apt-get update > /dev/null 2>&1
 get_apache_version ()
 {
   APACHE_VERSION="$(apachectl -V | grep version | awk {'print $3'})"
+}
+
+### Function: get_mysql_version
+# Obtain MySQL version information.
+get_mysql_version ()
+{
+  MYSQL_VERSION="$(mysql -uroot -p${MYSQL_ROOT_PASSWORD} -s -N -e "select version();")"
 }
 
 ### Function: get_php_version
@@ -75,6 +83,8 @@ mysql -u root -p"$MYSQL_ROOT_PASSWORD" -e "DELETE FROM mysql.user WHERE User='ro
 mysql -u root -p"$MYSQL_ROOT_PASSWORD" -e "DELETE FROM mysql.db WHERE Db='test' OR Db='test\_%'"
 # Flush Privileges
 mysql -u root -p"$MYSQL_ROOT_PASSWORD" -e "FLUSH PRIVILEGES"
+
+get_mysql_version
 }
 
 ### Function: install_php
@@ -116,7 +126,7 @@ install_apache
 echo "${GREEN}Apache installed!${NC} (${APACHE_VERSION})"
 
 install_mysql
-echo "${GREEN}MySQL installed!${NC}"
+echo "${GREEN}MySQL installed!${NC} (${MYSQL_VERSION})"
 
 install_php
 echo "${GREEN}PHP installed!${NC} (${PHP_VERSION})"
