@@ -1,6 +1,7 @@
-# lamp_install
-LAMP Stack Installation Script
+# LAMP Stack Installation Script (lamp_install)
 
-This was made to install a LAMP stack within a clean Ubuntu 14.04 environment.
+This script will install all of the necessary software required for a LAMP stack. It will check to see if any software has already been installed. No user input is required after execution.
 
-* Checks for already installed software within the stack.
+Works On:
+* Ubuntu 12.04
+* Ubuntu 14.04
