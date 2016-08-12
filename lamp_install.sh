@@ -115,9 +115,9 @@ MYSQL_ROOT_PASSWORD="$(< /dev/urandom tr -dc 'a-zA-Z0-9' | head -c${1:-32})"
 #######################
 
 echo ""
-echo "${CYAN}#############################${NC}"
-echo "${CYAN}# # LAMP INSTALL - tehgin # #${NC}"
-echo "${CYAN}#############################${NC}"
+echo "${CYAN}#################################${NC}"
+echo "${CYAN}###  LAMP INSTALL  -  tehgin  ###${NC}"
+echo "${CYAN}#################################${NC}"
 echo ""
 
 echo "Updating package lists..."
@@ -142,7 +142,7 @@ else
 fi
 
 # Attempt to install PHP.
-if hash php -v 2>/dev/null; then
+if type php 2>/dev/null; then
   echo "${RED}PHP already exists!${NC}"
 else
   install_php
