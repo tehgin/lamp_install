@@ -57,7 +57,7 @@ get_mysql_version ()
 # Obtain PHP version information.
 get_php_version ()
 {
-  PHP_VERSION="$(php -v | grep built | awk {'print $2'})"
+  PHP_VERSION="$(php -v | head -n 1 | awk {'print $2'})"
 }
 
 ### Function: install_apache
