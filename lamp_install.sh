@@ -115,9 +115,9 @@ MYSQL_ROOT_PASSWORD="$(< /dev/urandom tr -dc 'a-zA-Z0-9' | head -c${1:-32})"
 #######################
 
 echo ""
-echo "${CYAN}#########################${NC}"
-echo "${CYAN}# LAMP INSTALL - tehgin #${NC}"
-echo "${CYAN}#########################${NC}"
+echo "${CYAN}###########################${NC}"
+echo "${CYAN}#  LAMP INSTALL - tehgin  #${NC}"
+echo "${CYAN}###########################${NC}"
 echo ""
 
 echo "Updating package lists..."
@@ -125,8 +125,13 @@ update_repo
 echo "Ready! Attempting to install software stack now."
 echo ""
 
-install_apache
-echo "${GREEN}Apache installed!${NC} (${APACHE_VERSION})"
+# Attempt to install Apache.
+if hash apache2 gdate 2>/dev/null; then
+  echo "${RED}Apache already exists!${NC} (${APACHE_VERSION})"
+else
+  install_apache
+  echo "${GREEN}Apache installed!${NC} (${APACHE_VERSION})"
+fi
 
 install_mysql
 echo "${GREEN}MySQL installed!${NC} (${MYSQL_VERSION})"
@@ -137,8 +142,7 @@ echo "${GREEN}PHP installed!${NC} (${PHP_VERSION})"
 echo ""
 echo "Writing necessary configuration changes..."
 configure_apache
-echo ""
-echo "${GREEN}Configurations complete!${NC}"
+echo "Complete!"
 
 echo ""
 echo "${NC}MySQL Root Password: ${RED}${MYSQL_ROOT_PASSWORD}${NC}"
