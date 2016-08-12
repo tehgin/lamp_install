@@ -132,17 +132,10 @@ echo "${CYAN}###################################${NC}"
 echo ""
 
 # Check For Supported Distribution
-if [ "$OS" == "ubuntu" ]; then
-
-  # Check Version
-  if [ "$VERSION" == "12.4" || "$VERSION" == "14.4" || "$VERSION" == "16.4" ]; then
-    # Distribution Supported
-  else
-    echo "${OS} (${VERSION}) ${RED}is not supported!${NC}"
-  fi
-
+if [ "$OS" == "ubuntu" ] && [ "$VERSION" == "12.4" || "$VERSION" == "14.4" || "$VERSION" == "16.4" ]; then
+  # Distribution Supported
 else
-  echo "${OS} ${RED}is not supported!${NC}"
+  echo "${OS} (${VERSION}) ${RED}is not supported!${NC}"
   exit 1
 fi
 
