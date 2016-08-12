@@ -142,7 +142,7 @@ else
 fi
 
 # Attempt to install PHP.
-if type php 2>/dev/null; then
+if type php >/dev/null; then
   echo "${RED}PHP already exists!${NC}"
 else
   install_php
