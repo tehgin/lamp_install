@@ -11,6 +11,10 @@
 #########################
 MYSQL_ROOT_PASSWORD= # Automatically Set Via rand_pass
 
+# Distribution Information
+OS=$(awk '/DISTRIB_ID=/' /etc/*-release | sed 's/DISTRIB_ID=//' | tr '[:upper:]' '[:lower:]')
+VERSION=$(awk '/DISTRIB_RELEASE=/' /etc/*-release | sed 's/DISTRIB_RELEASE=//' | sed 's/[.]0/./')
+
 APACHE_VERSION= # Apache Version Information
 MYSQL_VERSION= # MySQL Version Information
 PHP_VERSION= # PHP Version Information
@@ -126,6 +130,21 @@ echo "${CYAN}###################################${NC}"
 echo "${CYAN}###   LAMP INSTALL  -  tehgin   ###${NC}"
 echo "${CYAN}###################################${NC}"
 echo ""
+
+# Check For Supported Distribution
+if [ "$OS" == "ubuntu" ]; then
+
+  # Check Version
+  if [ "$VERSION" == "12.4" || "$VERSION" == "14.4" || "$VERSION" == "16.4" ]; then
+    # Distribution Supported
+  else
+    echo "${OS} (${VERSION}) ${RED}is not supported!${NC}"
+  fi
+
+else
+  echo "${OS} ${RED}is not supported!${NC}"
+  exit 1
+fi
 
 echo "Updating package lists..."
 update_repo
