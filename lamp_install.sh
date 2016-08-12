@@ -138,8 +138,10 @@ if [ $OS == "ubuntu" ]; then
   case $VERSION in
     12.4|14.4|16.4)
       # Distribution Supported
+      ;;
     *)
-    echo "${OS} (${VERSION}) ${RED}is not supported!${NC}"
+      echo "${OS} (${VERSION}) ${RED}is not supported!${NC}"
+      ;;
   esac
 
 else
