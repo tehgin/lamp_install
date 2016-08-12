@@ -157,7 +157,7 @@ else
 fi
 
 # Write Apache configuration changes.
-if [APACHE_EXISTS = 0]; then
+if ["$APACHE_EXISTS" -eq 0]; then
   echo ""
   echo "Writing necessary configuration changes..."
   configure_apache
@@ -165,7 +165,7 @@ if [APACHE_EXISTS = 0]; then
 fi
 
 # Display MySQL root password.
-if [MYSQL_EXISTS = 0]; then
+if ["$MYSQL_EXISTS" -eq 0]; then
   echo ""
   echo "${NC}MySQL Root Password: ${RED}${MYSQL_ROOT_PASSWORD}${NC}"
   echo "Copy this password as it's not stored anywhere! You WILL lose it."
