@@ -15,8 +15,8 @@ APACHE_VERSION= # Apache Version Information
 MYSQL_VERSION= # MySQL Version Information
 PHP_VERSION= # PHP Version Information
 
-APACHE_EXISTS=0 # Does Apache already exist?
-MYSQL_EXISTS=0 # Does MySQL already exist?
+APACHE_EXISTS= # Does Apache already exist?
+MYSQL_EXISTS= # Does MySQL already exist?
 
 # Output Colors
 CYAN='\033[0;36m'
@@ -129,6 +129,7 @@ echo "Ready! Attempting to install software stack now."
 echo ""
 
 # Attempt to install Apache.
+APACHE_EXISTS=0
 if hash apache2 2>/dev/null; then
   APACHE_EXISTS=1
   echo "${RED}Apache already exists!${NC}"
@@ -138,6 +139,7 @@ else
 fi
 
 # Attempt to install MySQL.
+MYSQL_EXISTS=0
 if hash mysql 2>/dev/null; then
   MYSQL_EXISTS=1
   echo "${RED}MySQL already exists!${NC}"
