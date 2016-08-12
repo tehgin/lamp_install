@@ -107,7 +107,7 @@ if [ $OS = "ubuntu" ]; then
         sudo apt-get -qq install -f php5 libapache2-mod-php5 php5-mcrypt > /dev/null 2>&1
         ;;
       16.4)
-        sudo apt-get -qq install -f php7.0-mysql php7.0-curl php7.0-json php7.0-cgi  php7.0 libapache2-mod-php7 > /dev/null 2>&1
+        sudo apt-get -qq install -f php7.0-cli php7.0-common libapache2-mod-php7.0 php7.0 php7.0-mysql php7.0-fpm > /dev/null 2>&1
         sudo apt-get -qq install -f php-mcrypt php7.0-soap php7.0-mbstring php7.0-intl php7.0-xml php7.0-curl php7.0-gd > /dev/null 2>&1
         ;;
       *)
