@@ -108,6 +108,7 @@ if [ $OS = "ubuntu" ]; then
         ;;
       16.4)
         sudo apt-get -qq install -f php7.0-mysql php7.0-curl php7.0-json php7.0-cgi  php7.0 libapache2-mod-php7 > /dev/null 2>&1
+        sudo apt-get -qq install -f php-mcrypt php7.0-soap php7.0-mbstring php7.0-intl php7.0-xml php7.0-curl php7.0-gd > /dev/null 2>&1
         ;;
       *)
         echo "${OS} (${VERSION}) ${RED}is not supported!${NC}"
