@@ -134,6 +134,8 @@ echo "${GREEN}MySQL installed!${NC} (${MYSQL_VERSION})"
 install_php
 echo "${GREEN}PHP installed!${NC} (${PHP_VERSION})"
 
+echo ""
+echo "Writing necessary configuration changes..."
 configure_apache
 echo ""
 echo "${GREEN}Configurations complete!${NC}"
