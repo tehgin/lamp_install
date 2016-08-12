@@ -135,11 +135,12 @@ echo ""
 if [ $OS == "ubuntu" ]; then
 
   # Check Version
-  if [ $VERSION == "12.4" ] || [ $VERSION == "14.4" ] || [ $VERSION == "16.4" ]; then
-    # Distribution Supported
-  else
+  case $VERSION in
+    12.4|14.4|16.4)
+      # Distribution Supported
+    *)
     echo "${OS} (${VERSION}) ${RED}is not supported!${NC}"
-  fi
+  esac
 
 else
   echo "${OS} ${RED}is not supported!${NC}"
