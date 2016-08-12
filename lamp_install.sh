@@ -127,14 +127,21 @@ echo ""
 
 # Attempt to install Apache.
 if hash apache2 2>/dev/null; then
+  get_apache_version
   echo "${RED}Apache already exists!${NC} (${APACHE_VERSION})"
 else
   install_apache
   echo "${GREEN}Apache installed!${NC} (${APACHE_VERSION})"
 fi
 
-install_mysql
-echo "${GREEN}MySQL installed!${NC} (${MYSQL_VERSION})"
+# Attempt to install MySQL.
+if hash mysql 2>/dev/null; then
+  get_mysql_version
+  echo "${RED}MySQL already exists!${NC} (${MYSQL_VERSION})"
+else
+  install_mysql
+  echo "${GREEN}MySQL installed!${NC} (${MYSQL_VERSION})"
+fi
 
 install_php
 echo "${GREEN}PHP installed!${NC} (${PHP_VERSION})"
