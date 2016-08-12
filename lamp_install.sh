@@ -103,7 +103,7 @@ get_php_version
 configure_apache ()
 {
 if [ ! -f /etc/apache2/mods-enabled/dir.conf ]; then
-  echo "${RED}The file ${NC}/etc/apache2/mods-enabled/dir.conf${RED} does not exist!${NC}"
+  echo "${RED}Apache configuration missing: ${NC}/etc/apache2/mods-enabled/dir.conf"
 else
   sed -i 's/DirectoryIndex\ index.html\ index.cgi\ index.pl\ index.php\ index.xhtml\ index.htm/DirectoryIndex\ index.php\ index.html\ index.cgi\ index.pl\ index.xhtml\ index.htm/g' /etc/apache2/mods-enabled/dir.conf
   sudo service apache2 restart > /dev/null 2>&1 # Restart Apache
