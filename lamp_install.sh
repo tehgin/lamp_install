@@ -15,6 +15,9 @@ APACHE_VERSION= # Apache Version Information
 MYSQL_VERSION= # MySQL Version Information
 PHP_VERSION= # PHP Version Information
 
+APACHE_EXISTS=0 # Does Apache already exist?
+MYSQL_EXISTS=0 # Does MySQL already exist?
+
 # Output Colors
 CYAN='\033[0;36m'
 GREEN='\033[0;32m'
@@ -127,6 +130,7 @@ echo ""
 
 # Attempt to install Apache.
 if hash apache2 2>/dev/null; then
+  APACHE_EXISTS=1
   echo "${RED}Apache already exists!${NC}"
 else
   install_apache
@@ -135,6 +139,7 @@ fi
 
 # Attempt to install MySQL.
 if hash mysql 2>/dev/null; then
+  MYSQL_EXISTS=1
   echo "${RED}MySQL already exists!${NC}"
 else
   install_mysql
@@ -149,14 +154,20 @@ else
   echo "${GREEN}PHP installed!${NC} (${PHP_VERSION})"
 fi
 
-echo ""
-echo "Writing necessary configuration changes..."
-configure_apache
-echo "Complete!"
+# Write Apache configuration changes.
+if [APACHE_EXISTS = 0]; then
+  echo ""
+  echo "Writing necessary configuration changes..."
+  configure_apache
+  echo "Complete!"
+fi
 
-echo ""
-echo "${NC}MySQL Root Password: ${RED}${MYSQL_ROOT_PASSWORD}${NC}"
-echo "Copy this password as it's not stored anywhere! You WILL lose it."
+# Display MySQL root password.
+if [MYSQL_EXISTS = 0]; then
+  echo ""
+  echo "${NC}MySQL Root Password: ${RED}${MYSQL_ROOT_PASSWORD}${NC}"
+  echo "Copy this password as it's not stored anywhere! You WILL lose it."
+fi
 
 echo ""
 echo "${CYAN}Have a nice day!${NC}"
