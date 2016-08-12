@@ -132,7 +132,7 @@ echo "${CYAN}###################################${NC}"
 echo ""
 
 # Check For Supported Distribution
-if [[ $OS == "ubuntu*" ]]; then
+if [ $OS = "ubuntu" ]; then
 
   # Check Version
   case $VERSION in
@@ -155,7 +155,7 @@ echo "Ready! Attempting to install software stack now."
 echo ""
 
 # Attempt to install Apache.
-if [ hash apache2 2>/dev/null ]; then
+if hash apache2 2>/dev/null; then
   APACHE_EXISTS=1
   echo "${RED}Apache already exists!${NC}"
 else
@@ -164,7 +164,7 @@ else
 fi
 
 # Attempt to install MySQL.
-if [ hash mysql 2>/dev/null ]; then
+if hash mysql 2>/dev/null; then
   MYSQL_EXISTS=1
   echo "${RED}MySQL already exists!${NC}"
 else
@@ -173,7 +173,7 @@ else
 fi
 
 # Attempt to install PHP.
-if [ type php >/dev/null ]; then
+if type php >/dev/null; then
   echo "${RED}PHP already exists!${NC}"
 else
   install_php
