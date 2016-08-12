@@ -132,7 +132,7 @@ echo "${CYAN}###################################${NC}"
 echo ""
 
 # Check For Supported Distribution
-if [ $OS == "ubuntu" ]; then
+if [[ $OS == "ubuntu*" ]]; then
 
   # Check Version
   case $VERSION in
