@@ -76,7 +76,23 @@ rand_pass # Generate random password for MySQL root user.
 
 echo "mysql-server mysql-server/root_password password ${MYSQL_ROOT_PASSWORD}" | sudo debconf-set-selections
 echo "mysql-server mysql-server/root_password_again password ${MYSQL_ROOT_PASSWORD}" | sudo debconf-set-selections
-sudo apt-get -qq install -f mysql-server php5-mysql > /dev/null 2>&1 # Install MySQL
+
+if [ $OS = "ubuntu" ]; then
+
+    # Check Version
+    case $VERSION in
+      12.4|14.4)
+        sudo apt-get -qq install -f mysql-server php5-mysql > /dev/null 2>&1
+        ;;
+      16.4)
+        sudo apt-get -qq install -f mysql-server mysql-client > /dev/null 2>&1
+        ;;
+      *)
+        echo "${OS} (${VERSION}) ${RED}is not supported!${NC}"
+        ;;
+    esac
+
+fi
 
 sudo mysql_install_db > /dev/null 2>&1 # Install MySQL Database Directory Structure
 
