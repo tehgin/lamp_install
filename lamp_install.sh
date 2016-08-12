@@ -120,7 +120,9 @@ echo "${CYAN}# LAMP INSTALL - tehgin #${NC}"
 echo "${CYAN}#########################${NC}"
 echo ""
 
+echo "Updating package lists..."
 update_repo
+echo "Ready! Attempting to install software stack now."
 
 install_apache
 echo "${GREEN}Apache installed!${NC} (${APACHE_VERSION})"
@@ -132,6 +134,7 @@ install_php
 echo "${GREEN}PHP installed!${NC} (${PHP_VERSION})"
 
 configure_apache
+echo ""
 echo "${GREEN}Configurations complete!${NC}"
 
 echo ""
