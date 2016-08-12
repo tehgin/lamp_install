@@ -123,6 +123,7 @@ echo ""
 echo "Updating package lists..."
 update_repo
 echo "Ready! Attempting to install software stack now."
+echo ""
 
 install_apache
 echo "${GREEN}Apache installed!${NC} (${APACHE_VERSION})"
