@@ -98,7 +98,23 @@ get_mysql_version
 # Installs PHP and select modules.
 install_php ()
 {
-sudo apt-get -qq install -f php5 libapache2-mod-php5 php5-mcrypt > /dev/null 2>&1
+# Install Correct Software For Distribution
+if [ $OS = "ubuntu" ]; then
+
+    # Check Version
+    case $VERSION in
+      12.4|14.4)
+        sudo apt-get -qq install -f php5 libapache2-mod-php5 php5-mcrypt > /dev/null 2>&1
+        ;;
+      16.4)
+        sudo apt-get -qq install -f php7.0-mysql php7.0-curl php7.0-json php7.0-cgi  php7.0 libapache2-mod-php7 > /dev/null 2>&1
+        ;;
+      *)
+        echo "${OS} (${VERSION}) ${RED}is not supported!${NC}"
+        ;;
+    esac
+
+fi
 get_php_version
 }
 
