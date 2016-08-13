@@ -96,8 +96,6 @@ fi
 
 sudo mysql_install_db > /dev/null 2>&1 # Install MySQL Database Directory Structure
 
-# Set MySQL Root Password
-mysqladmin -u root -p$MYSQL_ROOT_PASSWORD password $MYSQL_ROOT_PASSWORD > /dev/null 2>&1
 # Delete Anonymous Users
 mysql -u root -p"$MYSQL_ROOT_PASSWORD" -e "DELETE FROM mysql.user WHERE User=''" > /dev/null 2>&1
 # Remove Remote Login For MySQL Root User
@@ -106,6 +104,7 @@ mysql -u root -p"$MYSQL_ROOT_PASSWORD" -e "DELETE FROM mysql.user WHERE User='ro
 mysql -u root -p"$MYSQL_ROOT_PASSWORD" -e "DELETE FROM mysql.db WHERE Db='test' OR Db='test\_%'" > /dev/null 2>&1
 # Flush Privileges
 mysql -u root -p"$MYSQL_ROOT_PASSWORD" -e "FLUSH PRIVILEGES" > /dev/null 2>&1
+
 
 get_mysql_version
 }
